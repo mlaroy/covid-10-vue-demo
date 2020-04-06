@@ -1,6 +1,6 @@
 <template>
     <tr>
-        <th><strong>{{ country.Country }}</strong></th>
+        <th>{{ country.Country }}</th>
         <td class="numbers">{{ formatNumber( country.TotalConfirmed) }}</td>
         <td class="numbers">{{ formatNumber( country.NewConfirmed) }}</td>
         <td class="numbers">{{ formatNumber( country.TotalDeaths) }}</td>

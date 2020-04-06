@@ -65,13 +65,17 @@ export default {
     margin-bottom: 1rem;
 }
 
+table {
+  width: 100%;
+}
+
 table td,
 table th {
   padding: 10px;
 }
 
-table tr:nth-of-type(odd) {
-  background: #ddd;
+table tbody tr:nth-of-type(odd) {
+  background: #eee;
 }
 
 table td.numbers {

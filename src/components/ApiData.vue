@@ -89,3 +89,25 @@ export default {
     }
 }
 </script>
+
+<style>
+
+button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    background-color:green;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3 ease;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+button:hover,
+button:focus {
+    background: #888;
+}
+
+</style>
