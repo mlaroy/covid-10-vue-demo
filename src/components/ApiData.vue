@@ -1,0 +1,91 @@
+<template>
+    <div>
+        <div class="loader" v-if="loading">
+            <p>loading...</p>
+        </div>
+        <div class="layout" v-else >
+            <h2 v-if="storeData.data">Date: {{ formattedDate }}</h2>
+            <div class="results">
+                <div class="box">
+                    <h3>Total Cases</h3>
+                    <h4>{{ formatNumber(storeData.data.Global.TotalConfirmed) }}</h4>
+                </div>
+                <div class="box">
+                    <h3>Total Deaths</h3>
+                    <h4>{{ formatNumber(storeData.data.Global.TotalDeaths) }}</h4>
+                </div>
+            </div>
+            <div class="box countries">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Country</th>
+                            <th><button @click="sortData('TotalConfirmed')">Total Confirmed</button></th>
+                            <th><button @click="sortData('NewConfirmed')">New Cases</button></th>
+                            <th><button @click="sortData('TotalDeaths')">Total Deaths</button></th>
+                            <th><button @click="sortData('NewDeaths')">New Deaths</button></th>
+                        </tr>
+                    </thead>
+                    <tbody v-if="sortedData">
+                        <Country
+                            v-for="country in sortedData"
+                            :country="country"
+                            :key="country.slug"
+                        />
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+
+import Country from './Country';
+
+import store from '../store';
+
+export default {
+    name: 'ApiData',
+    components: {
+        Country
+    },
+    data() {
+        return {
+            apiEndpoint: 'https://api.covid19api.com/summary',
+            loading: true,
+            storeData: store.state,
+            sortValue: 'TotalConfirmed'
+
+        }
+    },
+    mounted() {
+        store.fetchData(this.apiEndpoint);
+        this.loading = false;
+    },
+    computed: {
+        formattedDate() {
+            const date = new Date(this.storeData.data.Date);
+            return date.toLocaleString('en-US');
+        },
+
+        sortedData() {
+            const countries = [...this.storeData.data.Countries]
+            return countries.sort( (a, b) => {
+                return a[this.sortValue] < b[this.sortValue] ? 1 : -1;
+            });
+        }
+    },
+    methods: {
+        formatNumber( number ) {
+            return number.toLocaleString()
+        },
+        toggleSort() {
+            this.sorted = !this.sorted;
+        },
+        sortData( newSortValue ) {
+            this.sortValue = newSortValue
+        }
+    }
+}
+</script>
