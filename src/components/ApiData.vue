@@ -4,7 +4,7 @@
             <p>loading...</p>
         </div>
         <div class="layout" v-else >
-            <h2 v-if="storeData.data">Date: {{ formattedDate }}</h2>
+            <h2 v-if="storeData.data">{{ formattedDate }}</h2>
             <div class="results">
                 <div class="box">
                     <h3>Total Cases</h3>
@@ -66,7 +66,12 @@ export default {
     computed: {
         formattedDate() {
             const date = new Date(this.storeData.data.Date);
-            return date.toLocaleString('en-US');
+            return date.toLocaleString('en-US', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
         },
 
         sortedData() {
