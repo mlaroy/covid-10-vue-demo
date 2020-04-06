@@ -2,7 +2,7 @@
   <div id="app">
     <h1>COVID-19 Information</h1>
     <p>Source: https://api.covid19api.com</p>
-    <p>Built with <a href="https://vuejs.org/">Vue</a>, hosted on <a href="https://www.netlify.com/">Netlify</a></p>
+    <p>Built with <a href="https://vuejs.org/">Vue</a>, hosted on <a href="https://www.netlify.com/">Netlify</a>, <a href="https://github.com/mlaroy/covid-10-vue-demo">Github repo</a></p>
     <ApiData />
     <p>&copy; {{ date }} <a href="https://mikelaroy.ca">Michael LaRoy</a></p>
   </div>
