@@ -1,10 +1,10 @@
 <template>
     <div>
-        <div class="loader" v-if="loading">
+        <div class="loader" v-if="loading && !storeData.data">
             <p>loading...</p>
         </div>
-        <div class="layout" v-else >
-            <h2 v-if="storeData.data">{{ formattedDate }}</h2>
+        <div class="layout" v-else>
+            <h2>{{ formattedDate }}</h2>
             <div class="results">
                 <div class="box">
                     <h3>Total Cases</h3>
@@ -59,8 +59,8 @@ export default {
 
         }
     },
-    mounted() {
-        store.fetchData(this.apiEndpoint);
+    async mounted() {
+        await store.fetchData(this.apiEndpoint);
         this.loading = false;
     },
     computed: {
@@ -84,9 +84,6 @@ export default {
     methods: {
         formatNumber( number ) {
             return number.toLocaleString()
-        },
-        toggleSort() {
-            this.sorted = !this.sorted;
         },
         sortData( newSortValue ) {
             this.sortValue = newSortValue
