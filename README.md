@@ -1,5 +1,7 @@
 # vue-demo
 
+View this on [Netlify](https://covid-19-vue-demo.netlify.app/)
+
 ## Project setup
 ```
 npm install
